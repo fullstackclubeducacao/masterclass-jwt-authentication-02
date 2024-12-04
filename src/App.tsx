@@ -13,6 +13,11 @@ const App = () => {
     const init = async () => {
       // chamar rota /profile com accessToken
       try {
+        const accessToken = localStorage.getItem("accessToken");
+        const refreshToken = localStorage.getItem("refreshToken");
+        if (!accessToken && !refreshToken) {
+          return;
+        }
         await api.get("/profile");
         // se der certo, setar isAuthenticated como true
         setIsAuthenticated(true);

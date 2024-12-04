@@ -19,6 +19,12 @@ const Profile = () => {
     fetchUser();
   }, []);
 
+  const handleSignOutClick = () => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    window.location.reload();
+  };
+
   return (
     <div className="h-screen w-full flex flex-col items-center justify-center bg-slate-800 text-white">
       <h1>Bem vindo!</h1>
@@ -27,6 +33,13 @@ const Profile = () => {
         <p>Sobrenome: {user?.lastName}</p>
         <p>E-mail: {user?.email}</p>
         <p>Idade: {user?.age}</p>
+        <button
+          onClick={handleSignOutClick}
+          className="
+          bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Sair
+        </button>
       </div>
     </div>
   );
