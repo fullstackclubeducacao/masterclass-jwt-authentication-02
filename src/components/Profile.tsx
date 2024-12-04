@@ -1,5 +1,5 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
+import { api } from "../lib/axios";
 
 interface User {
   email: string;
@@ -13,11 +13,7 @@ const Profile = () => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const response = await axios.get<User>("http://localhost:8080/profile", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      });
+      const response = await api.get<User>("/profile");
       setUser(response.data);
     };
     fetchUser();

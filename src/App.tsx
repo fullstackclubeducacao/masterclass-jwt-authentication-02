@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Profile from "./components/Profile";
+import { api } from "./lib/axios";
 
 const App = () => {
   const [email, setEmail] = useState("");
@@ -10,15 +11,9 @@ const App = () => {
 
   useEffect(() => {
     const init = async () => {
-      // pegar accessToken do Local Storage
-      const accessToken = localStorage.getItem("accessToken");
       // chamar rota /profile com accessToken
       try {
-        await axios.get("http://localhost:8080/profile", {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        });
+        await api.get("/profile");
         // se der certo, setar isAuthenticated como true
         setIsAuthenticated(true);
       } catch (error) {
